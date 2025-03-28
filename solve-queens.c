@@ -6,14 +6,24 @@
 // Check if the queens are compatible
 bool queen_compatibles(CSPConstraint *constraint, const size_t *values,
                        unsigned int *data) {
+  // Avoid compiler warnings
+  (void)data;
+
   // Get the variables
-  size_t x0 = csp_constraint_get_variable(constraint, 0);
-  size_t x1 = csp_constraint_get_variable(constraint, 1);
+  size_t x0 =
+      csp_constraint_get_variable(constraint, 0);  // Column of the first queen
+  size_t x1 =
+      csp_constraint_get_variable(constraint, 1);  // Column of the second queen
+
   // Get the values
-  size_t y0 = values[x0];
-  size_t y1 = values[x1];
+  size_t y0 = values[x0];  // Row of the first queen
+  size_t y1 = values[x1];  // Row of the second queen
+
   // Check if the queens are compatible
-  return /* x0 != x1 && */ y0 != y1 && x0 + y1 != x1 + y0 && x0 + y0 != x1 + y1;
+  return /* x0 != x1 && */    // Differents columns (implicitly true)
+      (y0 != y1 &&            // Differents rows
+       x0 + y1 != x1 + y0 &&  // Differents negative diagonal '\'
+       x0 + y0 != x1 + y1);   // Differents positive diagonal '/'
 }
 
 // Print the solution
@@ -62,15 +72,18 @@ int main(int argc, char *argv[]) {
   csp_init();
   {
     // Create the queens array
-    size_t *queens = calloc(number, sizeof(size_t));
+    size_t *queens = calloc(number, sizeof(size_t));  // [0, 0, ..., 0]
 
     // Create the CSP problem
     size_t index;
     CSPProblem *problem = csp_problem_create(number, number * (number - 1) / 2);
     for (size_t i = 0; i < number; i++) {
+      // D(Q_i) = {0, 1, 2, 3}
       csp_problem_set_domain(problem, i, number);
     }
+
     index = 0;
+    // We iterate over each constraints
     for (size_t i = 0; i < number - 1; i++) {
       for (size_t j = i + 1; j < number; j++) {
         csp_problem_set_constraint(
