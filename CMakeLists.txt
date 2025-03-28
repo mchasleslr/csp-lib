@@ -7,6 +7,9 @@ project(CSP)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED True)
 
+# Set the C compiler flags
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra")
+
 # Support for test names
 if(POLICY CMP0110)
   cmake_policy(SET CMP0110 NEW)
