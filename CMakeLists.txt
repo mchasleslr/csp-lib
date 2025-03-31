@@ -29,11 +29,13 @@ add_library(csp SHARED ${SOURCES})
 target_include_directories(csp PUBLIC ${CMAKE_SOURCE_DIR})
 # set_target_properties(csp PROPERTIES VERSION ${PROJECT_VERSION})
 
-# Add the executable
+# Add the executables
 add_executable(solve-queens solve-queens.c)
+add_executable(solve-sudoku solve-sudoku.c)
 
-# Link the library to the executable
+# Link the library to the executables
 target_link_libraries(solve-queens csp)
+target_link_libraries(solve-sudoku csp)
 
 enable_testing()
 
