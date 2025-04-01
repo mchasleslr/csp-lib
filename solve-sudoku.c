@@ -26,14 +26,13 @@ int main(void) {
   csp_init();
   {
     // Setup
-    size_t i;
     size_t num_fixed = 0;
     size_t *grid = calloc(N_DOMAINS, sizeof(size_t));
     size_t *initial_grid = calloc(N_DOMAINS, sizeof(size_t));
     bool *is_fixed = calloc(N_DOMAINS, sizeof(bool));
 
     // Fill the grid with the loaded sudoku
-    for (i = 0; i < 81; i++) {
+    for (size_t i = 0; i < 81; i++) {
       if (raw[i]) {
         is_fixed[i] = true;
         initial_grid[i] = raw[i] - 1;
