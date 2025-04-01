@@ -227,7 +227,7 @@ bool csp_problem_backtrack(const CSPProblem *csp, size_t *values,
   for (size_t i = 0; i < csp->domains[index]; i++) {
     // Assign the value to the variable
     values[index] = i;
-    // Check if the assignment is consistent with the constraints
+    // Checkif the assignment is consistent with the constraints
     if (csp_problem_is_consistent(csp, values, data, index + 1) &&
         csp_problem_backtrack(csp, values, data, index + 1)) {
       return true;
