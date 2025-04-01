@@ -33,3 +33,9 @@ make test
 ```bash
 ./solve-queens <number_of_queens>
 ```
+
+### Sudoku
+
+```bash
+./solve-sudoku
+```
